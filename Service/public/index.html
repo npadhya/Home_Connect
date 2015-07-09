@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="./style/angular-material.css">
+
+    <script src="./script/angular/angular.js"></script> 
+    <script src="./script/angular-aria/angular-aria.js"></script> 
+    <script src="./script/angular-animate/angular-animate.js"></script> 
+    <script src="./script/angular-material/angular-material.js"></script> 
+    <script src="./script/script.js"></script>
+</head>
+    <body ng-app="HomeConnect">
+ 
+        <div ng-controller="mainController">
+          <md-switch ng-model="data.cb1" aria-label="Light 1" ng-true-value="'ON'" ng-false-value="'OFF'" class="md-warn md-display-3" ng-change="onChange('Light1',data.cb1)">
+            Light 1: {{ data.cb1 }}
+          </md-switch>
+          <md-switch ng-model="data.cb2" aria-label="Light 2" ng-true-value="'ON'" ng-false-value="'OFF'" class="md-warn md-display-3" ng-change="onChange('Light2',data.cb2)">
+            Light 2: {{ data.cb2 }}
+          </md-switch>
+          <md-switch ng-model="data.cb3" ng-disabled="true" aria-label="Light 3" ng-model="disabledModel" class="md-display-3" ng-change="onChange('Light3',data.cb3)">
+            Light 3: {{ data.cb3 }}
+          </md-switch>
+          <md-switch ng-model="data.cb4" ng-disabled="true" aria-label="Light 4" ng-model="disabledModel" class="md-display-3" ng-change="onChange('Light4',data.cb4)">
+            Light 4: {{ data.cb4 }}
+          </md-switch>
+          <md-switch ng-model="data.cb5" class="md-primary md-display-3" md-no-ink aria-label="Light 5" ng-model="disabledModel" ng-change="onChange('Light5',data.cb5)">
+            Light 5: {{ data.cb5 }}
+          </md-switch>
+        </div>
+    </body>
+</html>
