@@ -1,0 +1,17 @@
+{
+  "name": "Home_Control",
+  "version": "0.0.1",
+  "main": "app.js",
+  "dependencies": {
+    "express": "latest",
+    "async": "latest",
+    "request": "2.47.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "angular": "^1.4.1",
+    "angular-animate": "^1.4.1",
+    "angular-aria": "^1.4.1",
+    "angular-material": "^0.10.0"
+  }
+}
