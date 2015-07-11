@@ -1,6 +1,6 @@
 -- Constants
 SSID    = "Home_Connect"
-APPWD   = "############"
+APPWD   = "nopassword4me"
 CMDFILE = "mqtt.lua"   -- File that is executed after connection
 
 -- Some control variables
