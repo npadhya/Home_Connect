@@ -3,7 +3,7 @@ BROKER = "192.168.42.1"   -- Ip/hostname of MQTT broker
 BRPORT = 1883             -- MQTT broker port
 BRUSER = "user"           -- If MQTT authenitcation is used then define the user
 BRPWD  = "pwd"            -- The above user password
-CLIENTID = "ESP8266-" ..  wifi.sta.getmac() -- The MQTT ID. Change to something you like
+CLIENTID = "ESP82661"     -- The MQTT ID. Change to something you like
 
 -- MQTT topics to subscribe
 topics = {"RUT"} -- Add/remove topics to the array
