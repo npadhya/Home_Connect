@@ -73,7 +73,7 @@ function switch0Callback(level)
 	gpio.write(switch2,level)
 end
 
-gpio.trig(switch[0],"both",switch0Callback)
+gpio.trig(switch0,"both",switch0Callback)
 
 --main program to run after the subscriptions are done
 function run_main_prog()
