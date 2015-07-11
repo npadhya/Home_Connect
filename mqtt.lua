@@ -1,8 +1,8 @@
 -- Configuration to connect to the MQTT broker.
 BROKER = "192.168.42.1"   -- Ip/hostname of MQTT broker
 BRPORT = 1883             -- MQTT broker port
-BRUSER = "user"           -- If MQTT authenitcation is used then define the user
-BRPWD  = "pwd"            -- The above user password
+BRUSER = ""           -- If MQTT authenitcation is used then define the user
+BRPWD  = ""            -- The above user password
 CLIENTID = "ESP82661"     -- The MQTT ID. Change to something you like
 
 -- MQTT topics to subscribe
@@ -32,7 +32,7 @@ print "Connecting to MQTT broker. Please wait..."
 m = mqtt.Client( CLIENTID, 120, BRUSER, BRPWD)
 m:connect( BROKER , BRPORT, 0, function(conn)
 	print("Connected to MQTT:" .. BROKER .. ":" .. BRPORT .." as " .. CLIENTID )
-	m:publish("IMC", wifi.sta.getip(), 0, 0 , function(conn) end)
+	
 	mqtt_sub() --run the subscription function
 end)
 
@@ -70,15 +70,16 @@ end
 
 function switch0Callback(level)
 	publish_device_status_change("pin0",level)
+	print("Level changed : "..level)
 	gpio.write(switch2,level)
 end
 
-gpio.trig(switch[0],"both",switch0Callback)
+gpio.trig(switch0,"both",switch0Callback)
 
 --main program to run after the subscriptions are done
 function run_main_prog()
 	print("Main program")
-	
+	--m:publish("IMC", wifi.sta.getip(), 0, 0 , function(conn) end)
 	--tmr.alarm(2, 5000, 1, publish_data1 )
 	--tmr.alarm(3, 6000, 1, publish_data2 )
 	-- Callback to receive the subscribed topic messages. 
