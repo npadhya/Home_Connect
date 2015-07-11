@@ -1,5 +1,5 @@
 -- Configuration to connect to the MQTT broker.
-BROKER = "192.168.1.13"   -- Ip/hostname of MQTT broker
+BROKER = "192.168.42.1"   -- Ip/hostname of MQTT broker
 BRPORT = 1883             -- MQTT broker port
 BRUSER = "user"           -- If MQTT authenitcation is used then define the user
 BRPWD  = "pwd"            -- The above user password
