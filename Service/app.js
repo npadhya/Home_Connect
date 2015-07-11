@@ -12,7 +12,7 @@ global.devices = {"Light1":"pin1", "Light2":"pin2"};
 
 global.rooms = {
 	"Room1" : {
-		"ip" : "192.168.42.14",
+		"ip" : "192.168.42.5",
 		"devices" : {
 			"Light1" : "pin1",
 			"Light2" : "pin2"
