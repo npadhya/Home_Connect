@@ -73,9 +73,7 @@ gpio.trig(switch0,"both",switch0Callback)
 --main program to run after the subscriptions are done
 function run_main_prog()
 	print("Main program")
-	m:publish("IMC", wifi.sta.getip(), 0, 0 , function(conn) end)
-	--tmr.alarm(2, 5000, 1, publish_data1 )
-	--tmr.alarm(3, 6000, 1, publish_data2 )
+	m:publish("IMC", wifi.sta.getip(), 0, 0 , function() end)
 	-- Callback to receive the subscribed topic messages. 
 	m:on("message", function(conn, topic, data)
 		print(topic .. " : " )
