@@ -42,7 +42,7 @@ var router = express.Router();
 
 router.use(function(req, res, next) {
 	// log each request to the console
-	res.setHeader("Content-Type", "application/json");
+	//res.setHeader("Content-Type", "application/json");
 	res.setHeader("Access-Control-Allow-Origin","*");
 	console.log(req.method, req.url);
 	// continue doing what we were doing and go to the route
@@ -89,7 +89,7 @@ app.get('/getDeviceStatus', function(req, res){
 });
 
 app.get('/getMCUInfo', function(req, res){
-	res.sendfile('temp.lua')
+	res.sendFile(__dirname+'temp.lua')
 });
 
 // This endpoint will be called by EPS to add them self in the Home_Connect app.
