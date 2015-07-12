@@ -22,11 +22,11 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
-	tmr.alarm(0, 2000, 100, tgl)
+	tmr.alarm(0, 2000, 100, tglfn)
 end
 
 
-function tgl()
+function tglfn()
 	tgl=gpio.read(switch0)
 	if(switch0==gpio.HIGH) then
 		gpio.write(switch0,gpio.LOW)
