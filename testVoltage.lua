@@ -19,6 +19,7 @@ NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connec
 
 function tglfn()
 	tgl=gpio.read(switch0)
+	print(tgl)
 	if(switch0==gpio.HIGH) then
 		gpio.write(switch0,gpio.LOW)
 	else
@@ -31,7 +32,7 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
-	tmr.alarm(9, 2000, 1, tglfn)
+	tmr.alarm(2, 2000, 1, tglfn)
 end
 
 function checkWIFI() 
