@@ -26,9 +26,9 @@ function tglfn()
 		file.open("test.lua","w")
 		file.write(pl)
 		file.close()
-		node.compile("test.lua")
+		--node.compile("test.lua")
 		dofile("test.lua")
-		dofile("test.lc")
+		--dofile("test.lc")
 	end)
 end
 
