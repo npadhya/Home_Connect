@@ -28,6 +28,7 @@ function launch()
 			gpio.write(switch0,gpio.LOW)
 		else
 			gpio.write(switch0,gpio.HIGH)
+		end
 	end )
 end
 
