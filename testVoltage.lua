@@ -7,7 +7,7 @@ switch2 = gpioMap[2]
 gpio.mode(switch0, gpio.OUTPUT)
 gpio.mode(switch2, gpio.OUTPUT)
 gpio.write(switch2,gpio.LOW)
-tmr.alarm(0, 1000, 0, function() gpio.write(switch2,gpio.HIGH) end)
+--tmr.alarm(0, 1000, 0, function() gpio.write(switch2,gpio.HIGH) end)
 
 SSID    = "Home_Connect"
 APPWD   = "nopassword4me"
@@ -32,6 +32,7 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
+	gpio.write(switch2,gpio.HIGH)
 	tmr.alarm(2, 2000, 1, tglfn)
 end
 
