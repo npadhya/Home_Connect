@@ -89,7 +89,7 @@ app.get('/getDeviceStatus', function(req, res){
 });
 
 app.get('/getMCUInfo', function(req, res){
-	res.sendfile(__dirname +'/temp.lua')
+	res.sendfile('temp.lua')
 });
 
 // This endpoint will be called by EPS to add them self in the Home_Connect app.
