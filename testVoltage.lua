@@ -20,7 +20,7 @@ NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connec
 function tglfn()
 	tgl=gpio.read(switch0)
 	print(tgl)
-	if(switch0==gpio.HIGH) then
+	if(tgl == gpio.HIGH) then
 		gpio.write(switch0,gpio.LOW)
 	else
 		gpio.write(switch0,gpio.HIGH)
