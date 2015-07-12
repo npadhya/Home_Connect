@@ -53,7 +53,7 @@ function publish_device_status_change(pin, newStatus)
 	-- If semaphor is locked, We need to think about queue for the coming events
 	if pub_sem == 0 then  -- Is the semaphore set?
 		pub_sem = 1       -- Nop. Let's block it
-		m:publish("DSC",pin..newStatus,0,0, function(conn) 
+		m:publish("DSC",wifi.sta.getip().."-"..pin.."-"..newStatus,0,0, function(conn) 
 			-- Callback function. We've sent the data
 			print("Sent DSC : "..pin.." - "..newStatus)
 			pub_sem = 0  -- Unblock the semaphore
