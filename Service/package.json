@@ -5,7 +5,8 @@
   "dependencies": {
     "express": "latest",
     "async": "^1.3.0",
-    "request": "2.47.0"
+    "request": "2.47.0",
+    "mqtt" : "latest"
   },
   "private": true,
   "devDependencies": {

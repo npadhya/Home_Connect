@@ -88,6 +88,10 @@ app.get('/getDeviceStatus', function(req, res){
 
 });
 
+app.get('/getMCUInfo', function(req, res){
+	res.send("print(\"Hello World\")")
+});
+
 // This endpoint will be called by EPS to add them self in the Home_Connect app.
 app.post('/addDeviceInfo', function(req, res){
 

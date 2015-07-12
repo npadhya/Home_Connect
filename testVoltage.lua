@@ -18,13 +18,18 @@ wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
 function tglfn()
-	tgl=gpio.read(switch0)
-	print(tgl)
-	if(tgl == gpio.HIGH) then
-		gpio.write(switch0,gpio.LOW)
-	else
-		gpio.write(switch0,gpio.HIGH)
-	end
+	conn = net.createConnection(net.TCP, false)
+	conn:connect(8080,"192.168.42.1")
+	conn:send("GET /getMCUInfo HTTP/1.0\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:on("receive", function(conn,pl)
+		print(pl)
+		file.open("test.lua","w")
+		file.write(pl)
+		file.close()
+		node.compile("test.lua")
+		dofile("test.lua")
+		dofile("test.lc")
+	end)
 end
 
 -- Change the code of this function that it calls your code.
@@ -33,7 +38,7 @@ function launch()
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
 	gpio.write(switch2,gpio.HIGH)
-	tmr.alarm(2, 2000, 1, tglfn)
+	tmr.alarm(2, 2000, 0, tglfn) --call tglfn only once
 end
 
 function checkWIFI() 
