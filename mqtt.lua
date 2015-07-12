@@ -12,17 +12,12 @@ topics = {"RUT"} -- Add/remove topics to the array
 pub_sem = 0         -- MQTT Publish semaphore. Stops the publishing, if the previous hasn't ended
 current_topic  = 1  -- variable for one currently being subscribed to
 topicsub_delay = 50 -- microseconds between subscription attempts, worked for me (local network) down to 5...YMMV
-id1 = 0
-id2 = 0
 
 -- New GPIO mapping table for NodeMCU
-gpioMap = {[0]=3,[1]=10,[2]=4,[3]=9,[4]=1,[5]=2,[10]=12,[12]=6,[14]=5,[15]=8,[16]=0}
+gpioMap = {[0]=3,[2]=4}
 
 switch0 = gpioMap[0]
-switch1 = gpioMap[1]
 switch2 = gpioMap[2]
-switch3 = gpioMap[3]
-switch4 = gpioMap[4]
 
 gpio.mode(switch0, gpio.INT)
 gpio.mode(switch2, gpio.OUTPUT)
