@@ -33,7 +33,7 @@ function tgl()
 	else
 		gpio.write(switch0,gpio.HIGH)
 	end
-end )
+end
 
 function checkWIFI() 
 	if ( wifiTrys > NUMWIFITRYS ) then
