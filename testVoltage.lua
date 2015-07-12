@@ -34,7 +34,7 @@ function tglfn()
 			file.write(pl)
 			file.close()
 			--node.compile("test.lua")
-			--dofile("test.lua")
+			dofile("test.lua")
 			--dofile("test.lc")
 		else
 			print("Cant understand Payload")
