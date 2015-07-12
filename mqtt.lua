@@ -1,8 +1,8 @@
 -- Configuration to connect to the MQTT broker.
 BROKER = "192.168.42.1"   -- Ip/hostname of MQTT broker
 BRPORT = 1883             -- MQTT broker port
-BRUSER = ""           -- If MQTT authenitcation is used then define the user
-BRPWD  = ""            -- The above user password
+--BRUSER = ""           -- If MQTT authenitcation is used then define the user
+--BRPWD  = ""            -- The above user password
 CLIENTID = "ESP82661"     -- The MQTT ID. Change to something you like
 
 -- MQTT topics to subscribe
@@ -23,11 +23,10 @@ gpio.mode(switch0, gpio.INT)
 gpio.mode(switch2, gpio.OUTPUT)
 
 -- connect to the broker
-print "Connecting to MQTT broker. Please wait..."
-m = mqtt.Client( CLIENTID, 120, BRUSER, BRPWD)
+print("Connecting to MQTT broker. Please wait...")
+m = mqtt.Client( CLIENTID, 120, "", "")
 m:connect( BROKER , BRPORT, 0, function(conn)
 	print("Connected to MQTT:" .. BROKER .. ":" .. BRPORT .." as " .. CLIENTID )
-	
 	mqtt_sub() --run the subscription function
 end)
 
@@ -55,12 +54,12 @@ function publish_device_status_change(pin, newStatus)
 		pub_sem = 1       -- Nop. Let's block it
 		m:publish("DSC",pin.."-"..newStatus,0,0, function(conn) 
 			-- Callback function. We've sent the data
-			print("Sent DSC : "..pin.." - "..newStatus)
+			print("Sent DSC : "..pin.."-"..newStatus)
 			pub_sem = 0  -- Unblock the semaphore
 		end)
 	-- else
 	--		publish_device_status_change(pin,newStatus) -- Recursively call the method to see semaphor unlocked
-	end  
+	end
 end
 
 function switch0Callback(level)
