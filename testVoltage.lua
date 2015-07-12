@@ -17,15 +17,6 @@ APPWD   = "nopassword4me"
 wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
--- Change the code of this function that it calls your code.
-function launch()
-	print("Connected to WIFI!")
-	print("IP Address : " .. wifi.sta.getip())
-	-- Call our command file
-	tmr.alarm(0, 2000, 100, tglfn)
-end
-
-
 function tglfn()
 	tgl=gpio.read(switch0)
 	if(switch0==gpio.HIGH) then
@@ -33,6 +24,14 @@ function tglfn()
 	else
 		gpio.write(switch0,gpio.HIGH)
 	end
+end
+
+-- Change the code of this function that it calls your code.
+function launch()
+	print("Connected to WIFI!")
+	print("IP Address : " .. wifi.sta.getip())
+	-- Call our command file
+	tmr.alarm(1, 2000, 100, tglfn)
 end
 
 function checkWIFI() 
