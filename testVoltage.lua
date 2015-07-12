@@ -31,7 +31,7 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
-	tmr.alarm(1, 2000, 100, tglfn)
+	tmr.alarm(9, 2000, 1, tglfn)
 end
 
 function checkWIFI() 
