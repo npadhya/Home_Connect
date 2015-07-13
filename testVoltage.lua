@@ -20,7 +20,7 @@ NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connec
 function tglfn()
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
-	conn:send("GET /getMCUInfo HTTP/1.0\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:send("GET /getMCUInfo HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
