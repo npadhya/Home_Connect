@@ -34,16 +34,6 @@ function tglfn()
 			file.write(pl)
 			file.close()
 			--node.compile("test.lua")
-			if pcall(dofile("test.lua")) then
-				print("Done")
-      			else
-      				file.open("test.lua","r")
-      				print(file.readline())
-      				print(file.readline())
-      				print(file.readline())
-      				print(file.readline())
-      				file.close()
-      			end
 			--dofile("test.lua")
 			--dofile("test.lc")
 		else
