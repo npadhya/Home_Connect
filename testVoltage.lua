@@ -25,8 +25,8 @@ function tglfn()
 		print(pl)
 		if(pl ~= nil) then
 			i,j = string.find(pl,'\r\n\r\n')
-			print(i)
-			print(j)
+			print("Value of i : "..i)
+			print("Value of j : "..j)
 			
 			--script = string.sub(pl,j+1,-1)
 			--print(script)
@@ -34,6 +34,16 @@ function tglfn()
 			file.write(pl)
 			file.close()
 			--node.compile("test.lua")
+			if pcall(dofile("test.lua")) then
+				print("Done")
+      			else
+      				file.open("test.lua","r")
+      				print(file.readline())
+      				print(file.readline())
+      				print(file.readline())
+      				print(file.readline())
+      				file.close()
+      			end
 			--dofile("test.lua")
 			--dofile("test.lc")
 		else
