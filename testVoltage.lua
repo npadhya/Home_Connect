@@ -44,7 +44,7 @@ function tglfn()
 		local function reset()
 			header = ''
 			isTruncated = false
-			dofile("test.lua")
+			--dofile("test.lua")
 			file.close()
 			tmr.stop(0)
 		end
