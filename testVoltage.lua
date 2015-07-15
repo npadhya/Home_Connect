@@ -41,6 +41,7 @@ function save(filename, response)
 end
 
 function tglfn()
+	file.open("test.lua","r")
 	conn = net.createConnection(net.TCP, false)
 	conn:on('receive', function(sck, response)
 		save("test.lua", response)
