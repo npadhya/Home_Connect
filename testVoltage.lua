@@ -17,46 +17,28 @@ APPWD   = "nopassword4me"
 wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
-local header = ''
-local isTruncated = false
-
-function save(filename, response)
-	print('--------')
-	print(response)
-	print('--------')
-	if isTruncated then
-		file.write(response)
-		return
-	end
-	header = header..response
-	local i, j = string.find(header, '\r\n\r\n')
-	if i == nil or j == nil then
-		return
-	end
-	prefixBody = string.sub(header, j+1, -1)
-	file.write(prefixBody)
-	header = ''
-	isTruncated = true
-	return
-end
-
 function tglfn()
-	file.open("test.lua","r")
 	conn = net.createConnection(net.TCP, false)
-	conn:on('receive', function(sck, response)
-		save("test.lua", response)
-        end)
 	conn:connect(8080,"192.168.42.1")
 	conn:send("GET /getMCUInfo HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
-	conn:on('disconnection', function(sck, response)
-		function reset()
-			header = ''
-			isTruncated = false
+	conn:on("receive", function(conn,pl)
+		print(pl)
+		if(pl ~= nil) then
+			i,j = string.find(pl,'\r\n\r\n')
+			print("Value of i : "..i)
+			print("Value of j : "..j)
+			
+			--script = string.sub(pl,j+1,-1)
+			--print(script)
+			file.open("test.lua","w")
+			file.write(pl)
 			file.close()
-			tmr.stop(0)
-			print('test.lua.. saved')
+			--node.compile("test.lua")
+			--dofile("test.lua")
+			--dofile("test.lc")
+		else
+			print("Cant understand Payload")
 		end
-		tmr.alarm(0, 2000, 1, reset)
 	end)
 end
 
