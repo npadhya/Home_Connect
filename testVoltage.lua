@@ -47,7 +47,6 @@ function tglfn()
 			dofile("test.lua")
 			file.close()
 			tmr.stop(0)
-			print(filename..' saved')
 		end
 		tmr.alarm(0, 2000, 1, reset)
 	end)
