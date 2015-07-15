@@ -25,8 +25,8 @@ function tglfn()
 		print(pl)
 		if(pl ~= nil) then
 			local i,j = string.find(pl,'\r\n\r\n')
-			print("Value of i : "..i)
-			print("Value of j : "..j)
+			--print("Value of i : "..i)
+			--print("Value of j : "..j)
 			
 			--script = string.sub(pl,j+1,-1)
 			--print(script)
