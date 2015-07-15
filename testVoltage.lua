@@ -17,6 +17,9 @@ APPWD   = "nopassword4me"
 wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
+local header = ''
+local isTruncated = false
+
 function save(filename, response)
 	print('--------')
 	print(response)
