@@ -24,7 +24,7 @@ function tglfn()
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
-			i,j = string.find(pl,'\r\n\r\n')
+			local i,j = string.find(pl,'\r\n\r\n')
 			print("Value of i : "..i)
 			print("Value of j : "..j)
 			
