@@ -19,27 +19,28 @@ NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connec
 
 function tglfn()
 	conn = net.createConnection(net.TCP, false)
+	conn:on("receive", function(conn, pl) script = script..pl end)
 	conn:connect(8080,"192.168.42.1")
 	conn:send("GET /getMCUInfo HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
-	conn:on("receive", function(conn,pl)
-		print(pl)
-		if(pl ~= nil) then
-			i,j = string.find(pl,'\r\n\r\n')
-			print("Value of i : "..i)
-			print("Value of j : "..j)
-			
-			--script = string.sub(pl,j+1,-1)
-			--print(script)
-			file.open("test.lua","w")
-			file.write(pl)
-			file.close()
-			--node.compile("test.lua")
-			--dofile("test.lua")
-			--dofile("test.lc")
-		else
-			print("Cant understand Payload")
-		end
-	end)
+	print("----")
+	print(script)
+	print("----")
+	if(script ~= nil) then
+		i,j = string.find(script,'\r\n\r\n')
+		print("Value of i : "..i)
+		print("Value of j : "..j)
+		
+		--script = string.sub(pl,j+1,-1)
+		--print(script)
+		file.open("test.lua","w")
+		file.write(script)
+		file.close()
+		--node.compile("test.lua")
+		--dofile("test.lua")
+		--dofile("test.lc")
+	else
+		print("Cant understand Payload")
+	end
 end
 
 -- Change the code of this function that it calls your code.
