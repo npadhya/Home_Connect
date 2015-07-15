@@ -32,13 +32,24 @@ function tglfn()
 			--print(script)
 			file.open("test.lua","w")
 			file.write(pl)
-			file.close()
+			--file.close()
 			--node.compile("test.lua")
 			--dofile("test.lua")
 			--dofile("test.lc")
 		else
 			print("Cant understand Payload")
 		end
+	end)
+	conn:on('disconnection', function(sck, response)
+		local function reset()
+			header = ''
+			isTruncated = false
+			dofile("test.lua")
+			file.close()
+			tmr.stop(0)
+			print(filename..' saved')
+		end
+		tmr.alarm(0, 2000, 1, reset)
 	end)
 end
 
