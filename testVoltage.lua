@@ -11,6 +11,7 @@ gpio.write(switch2,gpio.LOW)
 
 SSID    = "Home_Connect"
 APPWD   = "nopassword4me"
+script=""
 --CMDFILE = "mqtt.lua"   -- File that is executed after connection
 
 -- Some control variables
