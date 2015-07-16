@@ -70,10 +70,10 @@ function run_main_prog()
     end
 		local _on,_off = "",""
 		if(_GET.switch0 == "ON")then
-			buf.."{'Switch0':'ON'}"
+			buf="{'Switch0':'ON'}"
 			gpio.write(switch0, gpio.HIGH);
 		elseif(_GET.switch0 == "OFF")then
-			buf.."{'Switch0':'OFF'}"
+			buf="{'Switch0':'OFF'}"
 			gpio.write(switch0, gpio.LOW);
 		end
 		client:send(buf);
