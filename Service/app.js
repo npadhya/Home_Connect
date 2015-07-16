@@ -14,8 +14,8 @@ global.rooms = {
 	"Room1" : {
 		"ip" : "192.168.42.5",
 		"devices" : {
-			"Light1" : "pin1",
-			"Light2" : "pin2"
+			"Switch0" : "switch0",
+			"Switch1" : "switch1"
 		}
 	},
 	"Room2" : {
