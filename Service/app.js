@@ -7,7 +7,7 @@ var http = require('http');
 global.querystring = require('querystring');
 var espControl = require('./espControl.js');
 var util = require('util');
-var mqttUtil = require('mqttUtil.js');
+var mqttUtil = require('./mqttUtil.js');
 
 //global.rooms = {"room1":"192.168.42.14", "room2" : "192.168.42.16"};
 global.devices = {"Light1":"pin1", "Light2":"pin2"};
