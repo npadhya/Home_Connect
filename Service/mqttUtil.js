@@ -1,4 +1,4 @@
-var client = mqttClient.connect('192.168.42.1:1883');
+var client = mqttClient.connect('192.168.42.1');
 
 client.subscribe("DSC");
 console.log("This is Working")
