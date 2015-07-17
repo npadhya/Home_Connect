@@ -1,4 +1,4 @@
-var client = mqttClient.createClient();
+var client = mqttClient.connect('192.168.42.1:1883');
 
 client.subscribe("IMC");
 
