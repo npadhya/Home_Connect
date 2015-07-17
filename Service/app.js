@@ -1,6 +1,7 @@
 'use strict';
 global.request = require('request');
 global.async = require('async');
+global.mqttClient = require('mqtt');
 var express = require('express');
 var http = require('http');
 global.querystring = require('querystring');
