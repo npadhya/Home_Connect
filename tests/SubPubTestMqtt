@@ -5,9 +5,6 @@ BRPORT = 1883             -- MQTT broker port
 --BRPWD  = ""            -- The above user password
 CLIENTID = "ESP82661"     -- The MQTT ID. Change to something you like
 
--- MQTT topics to subscribe
-topics = {"RUT"} -- Add/remove topics to the array
-
 -- Control variables.
 pub_sem = 0         -- MQTT Publish semaphore. Stops the publishing, if the previous hasn't ended
 current_topic  = 1  -- variable for one currently being subscribed to
