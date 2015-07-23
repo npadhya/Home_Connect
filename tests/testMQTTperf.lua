@@ -6,7 +6,9 @@ pub_sem = 0
 current_topic  = 1
 
 m = mqtt.Client( CLIENTID, 120, "", "")
-m:connect( BROKER , BRPORT, 0, function(conn) end)
+m:connect( BROKER , BRPORT, 0, function(conn)
+  run_main_prog()
+end)
 
 function mqtt_pub()
  current_topic = current_topic + 1
