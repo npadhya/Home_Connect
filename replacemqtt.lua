@@ -1,1 +1,0 @@
-print(wifi.sta.getip())
