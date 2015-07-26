@@ -8,8 +8,8 @@ client.on("message", function(topic, payload) {
   if(topic === 'IMC'){
     console.log("IMC");
     console.log(payload);
-  } else if ( topic === 'SDC'){
-    console.log("SDC");
+  } else if ( topic === 'DSC'){
+    console.log("DSC");
     console.log(payload);
   }
 });
