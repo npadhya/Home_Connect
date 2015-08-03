@@ -1,14 +1,3 @@
--- New GPIO mapping table for NodeMCU
-gpioMap = {[0]=3,[2]=4}
-
-switch0 = gpioMap[0]
-switch2 = gpioMap[2]
-
-gpio.mode(switch0, gpio.OUTPUT)
-gpio.mode(switch2, gpio.OUTPUT)
-gpio.write(switch2,gpio.LOW)
---tmr.alarm(0, 1000, 0, function() gpio.write(switch2,gpio.HIGH) end)
-
 SSID    = "Home_Connect"
 APPWD   = "nopassword4me"
 --CMDFILE = "mqtt.lua"   -- File that is executed after connection
@@ -20,7 +9,7 @@ NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connec
 function tglfn()
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
-	conn:send("GET /getMCUInfo HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
@@ -57,7 +46,6 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
-	gpio.write(switch2,gpio.HIGH)
 	tmr.alarm(2, 2000, 0, tglfn) --call tglfn only once
 end
 
