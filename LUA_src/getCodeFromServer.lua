@@ -18,7 +18,7 @@ function tglfn()
 		--file.open("temp.lua","w")
 	end)
 	conn:on("receive", function(conn,pl)
-		print(pl)
+		--print(pl)
 		if(pl ~= nil) then
 			--file.write(pl)
 			buf = buf..pl
@@ -31,6 +31,12 @@ function tglfn()
 		local function reset()
 			header = ''
 			print(buf)
+			local i,j = string.find(buf, "---START---")
+			local k,l = string.find(buf, "---END---")
+			print('i : '..i)
+			print('j : '..j)
+			print('k : '..k)
+			print('l : '..l)
 			isTruncated = false
 			file.close()
 			--dofile("test.lua")
