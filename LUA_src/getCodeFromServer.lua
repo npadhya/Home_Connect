@@ -9,7 +9,7 @@ wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
 function tglfn()
-	local buf ="";
+	local buf =""
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
 	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
