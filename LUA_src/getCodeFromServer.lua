@@ -14,13 +14,12 @@ function tglfn()
 	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
 	conn:on("connection", function(conn, pl)
 		print("Connected. Now creating file temp.lua")
-		
+		file.open("temp.lua","w")
 	end)
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
 			--local i,j = string.find(pl,'\r\n\r\n')
-			file.open("temp.lua","w")
 			file.write(pl)
 		else
 			print("Cant understand Payload")
