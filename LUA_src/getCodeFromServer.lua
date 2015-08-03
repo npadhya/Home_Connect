@@ -20,7 +20,7 @@ function tglfn()
 		print(pl)
 		if(pl ~= nil) then
 			--local i,j = string.find(pl,'\r\n\r\n')
-			file.open("temp.lua","r")
+			file.open("temp.lua","w")
 			file.write(pl)
 		else
 			print("Cant understand Payload")
