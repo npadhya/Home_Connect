@@ -12,21 +12,15 @@ function tglfn()
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
 	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:on("connection", function(conn, pl)
+		print("Connected. Now creating file temp.lua")
+		file.open("temp.lua","r")
+	end)
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
-			local i,j = string.find(pl,'\r\n\r\n')
-			--print("Value of i : "..i)
-			--print("Value of j : "..j)
-			
-			--script = string.sub(pl,j+1,-1)
-			--print(script)
-			file.open("test.lua","w")
+			--local i,j = string.find(pl,'\r\n\r\n')
 			file.write(pl)
-			--file.close()
-			--node.compile("test.lua")
-			--dofile("test.lua")
-			--dofile("test.lc")
 		else
 			print("Cant understand Payload")
 		end
@@ -35,8 +29,8 @@ function tglfn()
 		local function reset()
 			header = ''
 			isTruncated = false
-			--dofile("test.lua")
 			file.close()
+			--dofile("test.lua")
 			tmr.stop(0)
 		end
 		tmr.alarm(0, 2000, 1, reset)
