@@ -1,6 +1,8 @@
+-- This file should be uploaded as main.lc i.e. should be compiled and uploaded
+-- using uplode '--compile' option
+
 SSID    = "Home_Connect"
 APPWD   = "nopassword4me"
---CMDFILE = "mqtt.lua"   -- File that is executed after connection
 
 -- Some control variables
 wifiTrys     = 0      -- Counter of trys to connect to wifi
