@@ -9,18 +9,19 @@ wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
 function tglfn()
+	local buf ="";
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
 	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
 	conn:on("connection", function(conn, pl)
 		print("Connected. Now creating file temp.lua")
-		file.open("temp.lua","w")
+		--file.open("temp.lua","w")
 	end)
 	conn:on("receive", function(conn,pl)
 		print(pl)
 		if(pl ~= nil) then
-			--local i,j = string.find(pl,'\r\n\r\n')
-			file.write(pl)
+			--file.write(pl)
+			buf = buf..pl
 		else
 			print("Cant understand Payload")
 		end
@@ -29,6 +30,7 @@ function tglfn()
 		print("Connection closed from server")
 		local function reset()
 			header = ''
+			print(buf)
 			isTruncated = false
 			file.close()
 			--dofile("test.lua")
