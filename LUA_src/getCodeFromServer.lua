@@ -36,7 +36,7 @@ function tglfn()
 			print('j : '..j)
 			file.write(string.sub(buf,j+1))
 			file.close()
-			--dofile("test.lua")
+			dofile("test.lua")
 			tmr.stop(0)
 		end
 		tmr.alarm(0, 2000, 1, reset)
