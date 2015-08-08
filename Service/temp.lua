@@ -1,7 +1,7 @@
 --START
 BROKER = "192.168.42.1"
 BRPORT = 1883
-CLIENTID = "ESP82661"
+CLIENTID = "ESP"..node.chipid()
 topics = {"RUT"}
 
 pub_sem = 0
@@ -50,7 +50,7 @@ end
 gpio.trig(switch0,"both",switch0Callback)
 
 function run_main_prog()
-	m:publish("IMC", wifi.sta.getip(), 0, 0 , function() end)
+	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
 	m:on("message", function(conn, topic, data)
 		if (data ~= nil ) then
 		end

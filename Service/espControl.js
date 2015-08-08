@@ -24,19 +24,9 @@ var espControl = {
 		});
 	},
 	getHomeInfo : function(getHomeInfoCallback){
-		var returnObj = {};
-		var keys = Object.keys(rooms);
-		for(var key in keys ){
-			var room = keys[key];
-			//console.log(room);
-			//returnObj.push(room);
-
-			var deviceList = rooms[room].devices;
-			var deviceKeys = Object.keys(deviceList);
-
-			returnObj[room] = deviceKeys;
-		}
-		getHomeInfoCallback(returnObj);
+		// This method is to maintain the logical layering of the application
+		// plus this method can be used in future to massage deviceStatus DAO
+		getHomeInfoCallback(deviceStatus);
 	}
 }
 
