@@ -9,7 +9,8 @@ client.on("message", function(topic, payload) {
 	if(topic === 'IMC'){
 		console.log("IMC");
 		console.log(payload);
-		var deviceDetail = payload.split('-');
+		var strPayload = payload.toString('utf8');
+		var deviceDetail = strPayload.split('-');
 		var deviceID = deviceDetail[0];
 		var deviceIP = deviceDetail[1];
 
@@ -27,7 +28,8 @@ client.on("message", function(topic, payload) {
 		console.log("DSC");
 		console.log(payload);
 
-		var deviceStatusDetail = payload.split('-');
+		var strPayload = payload.toString('utf8');
+		var deviceStatusDetail = strPayload.split('-');
 
 		var deviceIP = deviceStatusDetail[0];
 		var gpioPin = deviceStatusDetail[1];
