@@ -10,23 +10,26 @@ var util = require('util');
 var mqttUtil = require('./mqttUtil.js');
 
 //global.rooms = {"room1":"192.168.42.14", "room2" : "192.168.42.16"};
-global.devices = {"Light1":"pin1", "Light2":"pin2"};
-
-global.rooms = {
-	"Room1" : {
-		"ip" : "192.168.42.5",
-		"devices" : {
-			"Switch0" : "switch0",
-			"Switch1" : "switch1"
-		}
+global.deviceList = {
+	/* Sample DAO
+	"123456789" : {
+		"RoomName" : "",
+		"ipAddress" : ""
 	},
-	"Room2" : {
-		"ip" : "192.168.42.14",
+	"987654321" : {
+		"RoomName" : "",
+		"ipAddress" : ""
+	}*/
+};
+
+global.deviceStatus = {
+	/* Sample DAO
+	"192.168.42.5" : {
 		"devices" : {
-			"Light1" : "pin1",
-			"Light2" : "pin2"
+			"gpio0" : {"DeviceName" : "Fan", "status" : "ON" },
+			"gpio2" : {"DeviceName" : "Light", "status" : "OFF" }
 		}
-	}
+	}*/
 };
 
 var app = express();
