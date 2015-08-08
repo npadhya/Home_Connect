@@ -1,51 +1,42 @@
--- New GPIO mapping table for NodeMCU
-gpioMap = {[0]=3,[2]=4}
-
-switch0 = gpioMap[0]
-switch2 = gpioMap[2]
-
-gpio.mode(switch0, gpio.OUTPUT)
-gpio.mode(switch2, gpio.OUTPUT)
-gpio.write(switch2,gpio.LOW)
---tmr.alarm(0, 1000, 0, function() gpio.write(switch2,gpio.HIGH) end)
+-- This file should be uploaded as main.lc i.e. should be compiled and uploaded
+-- using uplode '--compile' option
 
 SSID    = "Home_Connect"
 APPWD   = "nopassword4me"
---CMDFILE = "mqtt.lua"   -- File that is executed after connection
 
 -- Some control variables
 wifiTrys     = 0      -- Counter of trys to connect to wifi
 NUMWIFITRYS  = 50    -- Maximum number of WIFI Testings while waiting for connection
 
 function tglfn()
+	local buf =""
 	conn = net.createConnection(net.TCP, false)
 	conn:connect(8080,"192.168.42.1")
-	conn:send("GET /getMCUInfo HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:send("GET /getCodeFromServer HTTP/1.1\r\nHOST: iol.esp\r\nConnection: close\r\nAccept:/\r\n\r\n")
+	conn:on("connection", function(conn, pl)
+		print("Connected. Now creating file temp.lua")
+		file.open("temp.lua","w")
+	end)
 	conn:on("receive", function(conn,pl)
-		print(pl)
+		--print(pl)
 		if(pl ~= nil) then
-			local i,j = string.find(pl,'\r\n\r\n')
-			--print("Value of i : "..i)
-			--print("Value of j : "..j)
-			
-			--script = string.sub(pl,j+1,-1)
-			--print(script)
-			file.open("test.lua","w")
-			file.write(pl)
-			--file.close()
-			--node.compile("test.lua")
-			--dofile("test.lua")
-			--dofile("test.lc")
+			--file.write(pl)
+			buf = buf..pl
 		else
 			print("Cant understand Payload")
 		end
 	end)
 	conn:on('disconnection', function(sck, response)
+		print("Connection closed from server")
 		local function reset()
 			header = ''
-			isTruncated = false
-			--dofile("test.lua")
+			--print(buf)
+			local i,j = string.find(buf, "--START")
+			print('i : '..i)
+			print('j : '..j)
+			file.write(string.sub(buf,j+1))
 			file.close()
+			dofile("temp.lua")
 			tmr.stop(0)
 		end
 		tmr.alarm(0, 2000, 1, reset)
@@ -57,7 +48,6 @@ function launch()
 	print("Connected to WIFI!")
 	print("IP Address : " .. wifi.sta.getip())
 	-- Call our command file
-	gpio.write(switch2,gpio.HIGH)
 	tmr.alarm(2, 2000, 0, tglfn) --call tglfn only once
 end
 

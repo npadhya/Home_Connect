@@ -90,7 +90,7 @@ app.get('/getDeviceStatus', function(req, res){
 
 });
 
-app.get('/getMCUInfo', function(req, res){
+app.get('/getCodeFromServer', function(req, res){
 	res.sendFile(__dirname+'/temp.lua')
 });
 
