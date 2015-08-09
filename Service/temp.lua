@@ -12,7 +12,7 @@ swtch = {
 	   switch1 = { interrupt = 3, output = 4},
 	   switch2 = { interrupt = 5, output = 6},
 	   switch3 = { interrupt = 7, output = 8},
-	   switch4 = { interrupt = 9, output = 10}
+	   switch4 = { interrupt = 1, output = 2}
 		}
 
 for i in pairs(swtch) do
@@ -75,6 +75,9 @@ function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
 	m:on("message", function(conn, topic, data)
 		print(topic .. " - " .. data)
+		if(topic == "REBOOT")then
+			node.restart()
+		end
 	end )
 	srv=net.createServer(net.TCP)
 	srv:listen(80,function(conn)
