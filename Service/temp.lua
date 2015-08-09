@@ -48,25 +48,21 @@ end
 
 function switch1Callback(level)
 	publish_device_status_change(swtch['switch1'].output,level)
-	print("Level changed : "..level)
 	gpio.write(swtch['switch1'].output,level)
 end
 
 function switch2Callback(level)
 	publish_device_status_change(swtch['switch2'].output,level)
-	print("Level changed : "..level)
 	gpio.write(swtch['switch2'].output,level)
 end
 
 function switch3Callback(level)
 	publish_device_status_change(swtch['switch3'].output,level)
-	print("Level changed : "..level)
 	gpio.write(swtch['switch3'].output,level)
 end
 
 function switch4Callback(level)
 	publish_device_status_change(swtch['switch4'].output,level)
-	print("Level changed : "..level)
 	gpio.write(swtch['switch4'].output,level)
 end
 
@@ -85,24 +81,20 @@ function run_main_prog()
 	srv=net.createServer(net.TCP)
 	srv:listen(80,function(conn)
 		conn:on("receive", function(client,request)
-			local buf = "";
 			local _, _, method, path, vars = string.find(request, "([A-Z]+) (.+)?(.+) HTTP");
 			if(method == nil)then
 				_, _, method, path = string.find(request, "([A-Z]+) (.+) HTTP");
 			end
-			local buf = ""
 			if (vars ~= nil)then
 				for k, v in string.gmatch(vars, "(%w+)=(%w+)&*") do
 					if(string.lower(v) == "on")then
-						gpio.write(swtch[k].interrupt, gpio.HIGH);
-						buf = buf .. "{'" .. k .. "':'" .. v .. "'}"  
+						gpio.write(swtch[k].interrupt, gpio.HIGH); 
 					else
 						gpio.write(swtch[k].interrupt, gpio.LOW);
-						buf = buf .. "{'" .. k .. "':'" .. v .. "'}"
 					end
 				end
     		end
-			client:send(buf);
+			client:send("done");
 			client:close();
 			collectgarbage();
 		end)
