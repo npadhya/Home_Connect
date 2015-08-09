@@ -52,7 +52,7 @@ function switchCallback(level)
 	gpio.write(swtch['switch1'].output,level)
 end
 
-gpio.trig(swtch['switch1'].interrupt,"both",switchCallback
+gpio.trig(swtch['switch1'].interrupt,"both",switchCallback)
 
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
