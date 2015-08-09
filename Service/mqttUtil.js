@@ -54,4 +54,8 @@ client.on("message", function(topic, payload) {
 	}
 });
 
-client.publish("IMC", "hello world!");
+// Publish I am alive every 5 Minutes (60 sec * 5)
+setInterval(function () {
+	client.publish("IMALIVE", "I am alive!!!");
+}, 60000*5);
+
