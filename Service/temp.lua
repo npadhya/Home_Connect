@@ -46,13 +46,14 @@ function publish_device_status_change(pin, newStatus)
 	end
 end
 
-function switch0Callback(level)
+function switchCallback(level, s)
 	publish_device_status_change("pin0",level)
+	print(s)
 	print("Level changed : "..level)
 	gpio.write(swtch['switch1'].output,level)
 end
 
-gpio.trig(swtch['switch1'].interrupt,"both",switch0Callback)
+gpio.trig(swtch['switch1'].interrupt,"both",switchCallback(1))
 
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
@@ -68,23 +69,21 @@ function run_main_prog()
 			if(method == nil)then
 				_, _, method, path = string.find(request, "([A-Z]+) (.+) HTTP");
 			end
-			local _GET = {}
+			local buf = ""
 			if (vars ~= nil)then
-			for k, v in string.gmatch(vars, "(%w+)=(%w+)&*") do
-				_GET[k] = v
-			end
-    end
-		local _on,_off = "",""
-		if(_GET.switch0 == "ON")then
-			buf="{'Switch0':'ON'}"
-			gpio.write(swtch['switch1'].interrupt, gpio.HIGH);
-		elseif(_GET.switch0 == "OFF")then
-			buf="{'Switch0':'OFF'}"
-			gpio.write(swtch['switch1'].interrupt, gpio.LOW);
-		end
-		client:send(buf);
-		client:close();
-		collectgarbage();
+				for k, v in string.gmatch(vars, "(%w+)=(%w+)&*") do
+					if(string.lower(v) == "on")then
+						gpio.write(swtch[k].interrupt, gpio.HIGH);
+						buf = buf .. "{'" .. k .. "':'" .. v .. "'}"  
+					else
+						gpio.write(swtch[k].interrupt, gpio.LOW);
+						buf = buf .. "{'" .. k .. "':'" .. v .. "'}"
+					end
+				end
+    		end
+			client:send(buf);
+			client:close();
+			collectgarbage();
 		end)
 	end)
 end
