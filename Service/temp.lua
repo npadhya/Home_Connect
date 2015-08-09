@@ -46,13 +46,34 @@ function publish_device_status_change(pin, newStatus)
 	end
 end
 
-function switchCallback(level)
-	publish_device_status_change("pin0",level)
+function switch1Callback(level)
+	publish_device_status_change(swtch['switch1'].output,level)
 	print("Level changed : "..level)
 	gpio.write(swtch['switch1'].output,level)
 end
 
-gpio.trig(swtch['switch1'].interrupt,"both",switchCallback)
+function switch2Callback(level)
+	publish_device_status_change(swtch['switch2'].output,level)
+	print("Level changed : "..level)
+	gpio.write(swtch['switch2'].output,level)
+end
+
+function switch3Callback(level)
+	publish_device_status_change(swtch['switch3'].output,level)
+	print("Level changed : "..level)
+	gpio.write(swtch['switch3'].output,level)
+end
+
+function switch4Callback(level)
+	publish_device_status_change(swtch['switch4'].output,level)
+	print("Level changed : "..level)
+	gpio.write(swtch['switch4'].output,level)
+end
+
+gpio.trig(swtch['switch1'].interrupt,"both",switch1Callback)
+gpio.trig(swtch['switch2'].interrupt,"both",switch2Callback)
+gpio.trig(swtch['switch3'].interrupt,"both",switch3Callback)
+gpio.trig(swtch['switch4'].interrupt,"both",switch4Callback)
 
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
