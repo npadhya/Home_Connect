@@ -1,4 +1,3 @@
-var fileSystem = require('fs');
 var client = mqttClient.connect('mqtt://192.168.42.1');
 
 client.subscribe("DSC");
