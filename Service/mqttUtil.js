@@ -37,9 +37,8 @@ client.on("message", function(topic, payload) {
 		gpioDetail["DeviceName"] = "Default Light";
 		gpioDetail["status"] = newStatus;
 
-		var devices = {};
+		var devices = deviceStatus[deviceIP];
 		devices[gpioPin] = gpioDetail;
-
 		deviceStatus[deviceIP] = devices;
 
 		fileSystem.writeFile('deviceStatus.json', JSON.stringify(deviceStatus), function (err) {
