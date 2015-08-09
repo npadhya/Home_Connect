@@ -84,5 +84,5 @@ function run_main_prog()
 			collectgarbage();
 		end)
 	end)
-	--print(node.heap())
+	print(node.heap())
 end
