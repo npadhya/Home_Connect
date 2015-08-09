@@ -74,9 +74,7 @@ gpio.trig(swtch['switch4'].interrupt,"both",switch4Callback)
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
 	m:on("message", function(conn, topic, data)
-		if (topic == "REBOOT" ) then
-			node.restart()
-		end
+		print(topic .. " - " .. data)
 	end )
 	srv=net.createServer(net.TCP)
 	srv:listen(80,function(conn)
