@@ -8,13 +8,18 @@ pub_sem = 0
 current_topic  = 1
 topicsub_delay = 50
 
-gpioMap = {[0]=3,[2]=4}
+swtch = { 
+	   switch1 = { interrupt = 3, output = 4},
+	   switch2 = { interrupt = 5, output = 6},
+	   switch3 = { interrupt = 7, output = 8},
+	   switch4 = { interrupt = 9, output = 10}
+		}
 
-switch0 = gpioMap[0]
-switch2 = gpioMap[2]
-
-gpio.mode(switch0, gpio.INT)
-gpio.mode(switch2, gpio.OUTPUT)
+for i in pairs(swtch) do
+    print(swtch[i].interrupt .. ' '.. swtch[i].output)
+    gpio.mode(swtch[i].interrupt, gpio.INT)
+	gpio.mode(swtch[i].output, gpio.OUTPUT)
+end
 
 m = mqtt.Client( CLIENTID, 120, "", "")
 m:connect( BROKER , BRPORT, 0, function(conn)
@@ -44,10 +49,10 @@ end
 function switch0Callback(level)
 	publish_device_status_change("pin0",level)
 	print("Level changed : "..level)
-	gpio.write(switch2,level)
+	gpio.write(swtch['switch1'].output,level)
 end
 
-gpio.trig(switch0,"both",switch0Callback)
+gpio.trig(swtch['switch1'].interrupt,"both",switch0Callback)
 
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
@@ -72,10 +77,10 @@ function run_main_prog()
 		local _on,_off = "",""
 		if(_GET.switch0 == "ON")then
 			buf="{'Switch0':'ON'}"
-			gpio.write(switch0, gpio.HIGH);
+			gpio.write(swtch['switch1'].interrupt, gpio.HIGH);
 		elseif(_GET.switch0 == "OFF")then
 			buf="{'Switch0':'OFF'}"
-			gpio.write(switch0, gpio.LOW);
+			gpio.write(swtch['switch1'].interrupt, gpio.LOW);
 		end
 		client:send(buf);
 		client:close();
