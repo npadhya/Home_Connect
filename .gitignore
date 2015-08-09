@@ -1,2 +1,4 @@
 /.project
 /Service/node_modules
+/Service/deviceList.json
+/Service/deviceStatus.json
