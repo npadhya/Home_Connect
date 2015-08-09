@@ -35,15 +35,21 @@ global.deviceStatus = {
 };
 
 fileSystem.readFile('deviceList.json', function(err, fileContent){
-	if (err) throw err;
-	deviceList = JSON.parse(fileContent);
-	console.log(JSON.stringify(deviceList));
+	if (err) {
+		console.log('File does not exist, This is OK!!');
+	} else {
+		deviceList = JSON.parse(fileContent);
+		console.log(JSON.stringify(deviceList));
+	}
 });
 
 fileSystem.readFile('deviceStatus.json', function(err, fileContent){
-	if (err) throw err;
-	deviceStatus = JSON.parse(fileContent);
-	console.log(JSON.stringify(deviceStatus));
+	if (err) {
+		console.log('File does not exist, This is OK!!');
+	} else {	
+		deviceStatus = JSON.parse(fileContent);
+		console.log(JSON.stringify(deviceStatus));
+	}
 });
 
 
