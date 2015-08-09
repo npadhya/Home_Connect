@@ -40,7 +40,7 @@ end
 function publish_device_status_change(pin, newStatus)
 	if pub_sem == 0 then
 		pub_sem = 1
-		m:publish("DSC",wifi.sta.getip().."-"..pin.."-"..newStatus,0,0, function(conn)
+		m:publish("DSC", node.chipid().."-"..pin.."-"..newStatus,0,0, function(conn)
 			pub_sem = 0 
 		end)
 	end
