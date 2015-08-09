@@ -2,7 +2,7 @@
 BROKER = "192.168.42.1"
 BRPORT = 1883
 CLIENTID = "ESP"..node.chipid()
-topics = {"RUT"}
+topics = {"RUT", "REBOOT"}
 
 pub_sem = 0
 current_topic  = 1
@@ -78,7 +78,8 @@ gpio.trig(swtch['switch4'].interrupt,"both",switch4Callback)
 function run_main_prog()
 	m:publish("IMC", node.chipid()..'-'..wifi.sta.getip(), 0, 0 , function() end)
 	m:on("message", function(conn, topic, data)
-		if (data ~= nil ) then
+		if (topic == "REBOOT" ) then
+			node.restart()
 		end
 	end )
 	srv=net.createServer(net.TCP)
