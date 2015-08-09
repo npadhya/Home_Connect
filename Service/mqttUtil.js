@@ -35,12 +35,18 @@ client.on("message", function(topic, payload) {
 
 		var gpioDetail = {};
 		gpioDetail["DeviceName"] = "Default Light";
-		gpioDetail["status"] = newStatus;
+		gpioDetail["Status"] = newStatus;
 
-		var devices = {};
-		devices[gpioPin] = gpioDetail;
-
-		deviceStatus[deviceIP] = devices;
+		var devices = deviceStatus[deviceIP];
+		if (devices === undefined){
+			var tempDevice = {};
+			tempDevice[gpioPin] = gpioDetail;
+			deviceStatus[deviceIP] = tempDevice;
+		} else {
+			deviceStatus[deviceIP][gpioPin] = gpioDetail;
+		}
+		//devices[gpioPin] = gpioDetail;
+		//deviceStatus[deviceIP] = devices;
 
 		fileSystem.writeFile('deviceStatus.json', JSON.stringify(deviceStatus), function (err) {
 			if (err) throw err;
