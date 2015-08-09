@@ -45,8 +45,8 @@ client.on("message", function(topic, payload) {
 		} else {
 			deviceStatus[deviceIP][gpioPin] = gpioDetail;
 		}
-		devices[gpioPin] = gpioDetail;
-		deviceStatus[deviceIP] = devices;
+		//devices[gpioPin] = gpioDetail;
+		//deviceStatus[deviceIP] = devices;
 
 		fileSystem.writeFile('deviceStatus.json', JSON.stringify(deviceStatus), function (err) {
 			if (err) throw err;
