@@ -1,6 +1,7 @@
 'use strict';
 global.request = require('request');
 global.async = require('async');
+global.fileSystem = require('fs');
 global.mqttClient = require('mqtt');
 var express = require('express');
 var http = require('http');
@@ -8,6 +9,7 @@ global.querystring = require('querystring');
 var espControl = require('./espControl.js');
 var util = require('util');
 var mqttUtil = require('./mqttUtil.js');
+
 
 //global.rooms = {"room1":"192.168.42.14", "room2" : "192.168.42.16"};
 global.deviceList = {
@@ -31,6 +33,19 @@ global.deviceStatus = {
 		}
 	}*/
 };
+
+fileSystem.readFile('deviceList.json', function(err, fileContent){
+	if (err) throw err;
+	deviceList = JSON.parse(fileContent);
+	console.log(JSON.stringify(deviceList));
+});
+
+fileSystem.readFile('deviceStatus.json', function(err, fileContent){
+	if (err) throw err;
+	deviceStatus = JSON.parse(fileContent);
+	console.log(JSON.stringify(deviceStatus));
+});
+
 
 var app = express();
 

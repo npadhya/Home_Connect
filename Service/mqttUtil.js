@@ -1,4 +1,3 @@
-var fileSystem = require('fs');
 var client = mqttClient.connect('mqtt://192.168.42.1');
 
 client.subscribe("DSC");
@@ -29,7 +28,7 @@ client.on("message", function(topic, payload) {
 		var strPayload = payload.toString('utf8');
 		var deviceStatusDetail = strPayload.split('-');
 
-		var deviceIP = deviceStatusDetail[0];
+		var deviceID = deviceStatusDetail[0];
 		var gpioPin = deviceStatusDetail[1];
 		var newStatus = deviceStatusDetail[2];
 
@@ -37,13 +36,13 @@ client.on("message", function(topic, payload) {
 		gpioDetail["DeviceName"] = "Default Light";
 		gpioDetail["Status"] = newStatus;
 
-		var devices = deviceStatus[deviceIP];
+		var devices = deviceStatus[deviceID];
 		if (devices === undefined){
 			var tempDevice = {};
 			tempDevice[gpioPin] = gpioDetail;
-			deviceStatus[deviceIP] = tempDevice;
+			deviceStatus[deviceID] = tempDevice;
 		} else {
-			deviceStatus[deviceIP][gpioPin] = gpioDetail;
+			deviceStatus[deviceID][gpioPin] = gpioDetail;
 		}
 		//devices[gpioPin] = gpioDetail;
 		//deviceStatus[deviceIP] = devices;
@@ -55,4 +54,8 @@ client.on("message", function(topic, payload) {
 	}
 });
 
-client.publish("IMC", "hello world!");
+// Publish I am alive every 5 Minutes (60 sec * 5)
+setInterval(function () {
+	client.publish("IMALIVE", "I am alive!!!");
+}, 60000*5);
+
