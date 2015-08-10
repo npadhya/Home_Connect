@@ -29,17 +29,19 @@ function tglfn()
 	conn:on('disconnection', function(sck, response)
 		print("Connection closed from server")
 		local function reset()
-			header = ''
 			--print(buf)
 			local i,j = string.find(buf, "--START")
-			print('i : '..i)
-			print('j : '..j)
-			file.write(string.sub(buf,j+1))
-			file.close()
-			dofile("temp.lua")
-			tmr.stop(0)
+			if(i == nil) then
+				print("Server is not running or Script does not have --START")
+				print("Include --START at the start of the downloaded script")
+				node.restart()
+			else
+				file.write(string.sub(buf,j+1))
+				file.close()
+				dofile("temp.lua")
+			end
 		end
-		tmr.alarm(0, 2000, 1, reset)
+		tmr.alarm(0, 2000, 0, reset)
 	end)
 end
 

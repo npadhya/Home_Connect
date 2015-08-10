@@ -14,7 +14,7 @@ echo "*                                                                         
 echo "******************************************************************************"
 
 cd ~/Git/Home_Connect/ROMs
-sudo python ../ESPtools/esptool.py -p /dev/ttyAMA0 write_flash 0x00 nodemcu-custom-float.bin
+sudo python ../ESPtools/esptool.py -p /dev/ttyAMA0 write_flash 0x00 latest-nodemcu-custom-integer.bin
 cd ..
 echo "******************************************************************************"
 echo "*                                                                            *"
