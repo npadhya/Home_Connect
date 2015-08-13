@@ -110,6 +110,14 @@ app.get('/getHomeInfo', function(req, res){
 	});
 });
 
+app.get('/getConnectedDevices', function(req, res){
+	espControl.getConnectedDevices(function(returnObj){
+		//res.send(returnObj);
+		res.send(JSON.stringify(returnObj));
+		console.log(returnObj);
+	});
+});
+
 app.get('/getDeviceStatus', function(req, res){
 
 });
