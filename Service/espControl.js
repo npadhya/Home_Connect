@@ -27,6 +27,11 @@ var espControl = {
 		// This method is to maintain the logical layering of the application
 		// plus this method can be used in future to massage deviceStatus DAO
 		getHomeInfoCallback(deviceStatus);
+	},
+	getConnectedDevices : function(getConnectedDevicesCallback){
+		// This method is to maintain the logical layering of the application
+		// plus this method can be used in future to massage deviceStatus DAO
+		getConnectedDevicesCallback(deviceList);
 	}
 }
 
